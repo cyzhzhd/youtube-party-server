@@ -1,13 +1,10 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import fs from 'fs';
 dotenv.config();
 
 function connect_DB() {
   function connect() {
-    // if (process.env.NODE_ENV !== 'production') {
-    //   mongoose.set('dubug', true);
-    // }
-
     const replicaURI = process.env.MONGO_URI;
     const options = {
       useNewUrlParser: true,
@@ -15,6 +12,7 @@ function connect_DB() {
       useCreateIndex: true,
       useFindAndModify: false,
       dbName: process.env.DB_NAME,
+      sslCA: fs.readFileSync('./rds-combined-ca-bundle.pem'),
     };
     function db_error(error) {
       if (error) {
