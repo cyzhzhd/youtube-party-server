@@ -2,12 +2,16 @@ import app from '../src/app.js';
 import debug from 'debug';
 debug('youtube-party-server:server');
 import http from 'http';
-// const debug = require('debug')('youtube-party-server:server');
-// const http = require('http');
-// const app = require('../app');
+import dotenv from 'dotenv';
 
-// const port = normalizePort(process.env.PORT || '3000');
-const port = 3000;
+// import path from 'path';
+// import { fileURLToPath } from 'url';
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+dotenv.config();
+const port = normalizePort(process.env.PORT || '3000');
+
 app.set('port', port);
 
 const server = http.createServer(app);
