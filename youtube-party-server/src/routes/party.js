@@ -6,4 +6,4 @@ router.post('/create', function (req, res, next) {
   res.status(200).send(name, details, hostId);
 });
 
-module.exports = router;
+export default router;
