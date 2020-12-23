@@ -4,10 +4,6 @@ debug('youtube-party-server:server');
 import http from 'http';
 import dotenv from 'dotenv';
 
-// import path from 'path';
-// import { fileURLToPath } from 'url';
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
 dotenv.config();
 const port = normalizePort(process.env.PORT || '3000');
