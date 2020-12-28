@@ -13,13 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 connect_DB();
-// app.set('public', path.join(__dirname, 'public'));
-// app.use('/public', path.join(__dirname, 'public'));
-// app.use(express.static('public'));
 app.use('/public', express.static('public'));
-console.log(path.join(__dirname, 'public'));
-// console.log(app.get());
-// app.set('views', path.join(__dirname, 'public'));
 
 app.use(logger('dev'));
 app.use(express.json());
