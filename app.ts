@@ -8,7 +8,6 @@ import partyRouter from './src/routes/party';
 const app = express();
 connect_DB();
 app.use('/public', express.static('public'));
-// app.use('/public', express.static(path.join(__dirname, "../public")));
 
 app.use(logger('dev'));
 app.use(express.json());
