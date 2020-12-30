@@ -1,8 +1,14 @@
-import app from '../app.js';
-import debug from 'debug';
+// import * as app from '../dist/app.js';
+// import app from '../dist/app.js';
+// import { app } from '../dist/app.js';
+const app = require('../dist/app');
+const debug = require('debug');
 debug('youtube-party-server:server');
-import http from 'http';
-import dotenv from 'dotenv';
+const http = require('http');
+const dotenv = require('dotenv');
+// import debug from 'debug';
+// import http from 'http';
+// import dotenv from 'dotenv';
 
 
 dotenv.config();

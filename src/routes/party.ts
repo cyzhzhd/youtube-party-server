@@ -4,11 +4,11 @@ import { Party } from '../models/partyModel.js';
 
 const router = express.Router();
 
-router.get('/', async (req,res) => {
+router.get('/', async (req, res) => {
   try {
     const parties = await Party.find({});
     res.status(200).send(parties);
-  } catch(error) {
+  } catch (error) {
     console.error("Party.find error", error);
   }
 })
@@ -17,7 +17,7 @@ router.post('/create', async (req, res, next) => {
   // need to add host Id after setting web socket server
   const { name, description } = req.body;
 
-  if( !name || !description ) {
+  if (!name || !description) {
     res.status(405).send("not enough parameter");
   }
 

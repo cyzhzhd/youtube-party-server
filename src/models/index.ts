@@ -3,18 +3,20 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 dotenv.config();
 
-function connect_DB() {
-  function connect() {
-    const replicaURI = process.env.MONGO_URI;
+function connect_DB () {
+  function connect () {
+    const replicaURI = <string>process.env.MONGO_URI;
     const options = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
       useFindAndModify: false,
+      ssl: true,
+      sslValidate: true,
       dbName: process.env.DB_NAME,
-      sslCA: fs.readFileSync('./rds-combined-ca-bundle.pem'),
+      sslCA: [fs.readFileSync('./rds-combined-ca-bundle.pem')],
     };
-    function db_error(error) {
+    function db_error (error: Error) {
       if (error) {
         console.log('몽고디비 연결 에러', error);
       } else {
