@@ -2,13 +2,10 @@
 // import app from '../dist/app.js';
 // import { app } from '../dist/app.js';
 const app = require('../dist/app');
-const debug = require('debug');
-debug('youtube-party-server:server');
+const debug = require('debug')('youtube-party-server:server');
 const http = require('http');
 const dotenv = require('dotenv');
-// import debug from 'debug';
-// import http from 'http';
-// import dotenv from 'dotenv';
+const setIoServer = require('../dist/src/socket');
 
 
 dotenv.config();
@@ -17,6 +14,8 @@ const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const server = http.createServer(app);
+setIoServer.default(server);
+
 
 server.listen(port);
 server.on('error', onError);

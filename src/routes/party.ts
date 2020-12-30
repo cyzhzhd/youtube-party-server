@@ -1,5 +1,4 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import { Party } from '../models/partyModel.js';
 
 const router = express.Router();
