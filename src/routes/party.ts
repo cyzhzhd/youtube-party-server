@@ -12,27 +12,29 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.post('/create', async (req, res, next) => {
-  // need to add host Id after setting web socket server
-  const { name, description } = req.body;
+router.post('/create', async (req, res) => {
+  const { name, description, hostId } = req.body;
 
+  console.log(hostId);
   if (!name || !description) {
     res.status(405).send("not enough parameter");
   }
 
   try {
-    const party = new Party({
+    const party = await new Party({
       name,
       description,
+      hostId,
       startTime: new Date(),
     });
 
     party.save();
-    res.status(201).send("new part is created");
+    res.status(201).send(party);
   } catch (error) {
     console.log('creating party error', error);
   }
   // res.status(200).send(name, description, hostId);
 });
+
 
 export default router;

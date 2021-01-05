@@ -25,7 +25,7 @@ app.use(cors({
 
 
 connect_DB();
-app.use('/public', express.static('public'));
+app.use('/', express.static('build'));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
