@@ -32,30 +32,43 @@ const setIoServer = function (server: import('http').Server): void {
     socket.on('updateVideoList', async (data) => {
       try {
         console.log('updatedVideoList', data);
-        const { partyId, videoId } = data;
+        const { partyId, videoId, add } = data;
 
-        const party = await Party.findById(partyId);
-        console.log('before update', party);
-
+        let updatedParty
         const filter = { _id: partyId };
-        const updatedParty = await Party.findOneAndUpdate(filter, {
-          $addToSet: {
-            videos: videoId,
-          }
-        }, {
+        let cond;
+        if(add) {
+          cond = {
+            $addToSet: {
+              videos: videoId,
+            }
+          };
+        } else {
+          cond = {
+            $pull: {
+              videos: videoId,
+            }
+          };
+        }
+
+        updatedParty = await Party.findOneAndUpdate(filter, cond, {
           new: true
         });
-        console.log('after Update', updatedParty);
         ioServer.in(partyId).emit('deliverPartyDetail', updatedParty);
       } catch (error) {
         console.log(error);
       }
     })
 
-    socket.on('syncVideo', data => {
+    socket.on('syncVideoTime', data => {
       const { partyId, videoId, time } = data;
       console.log(data);
       socket.to(partyId).emit('deliverVideoTime', { videoId, time });
+    })
+
+    socket.on('syncVideoId', data => {
+      const {partyId, videoId} = data;
+      socket.to(partyId).emit('deliverVideoId', {videoId})
     })
   })
 }

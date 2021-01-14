@@ -11,10 +11,7 @@ function connect_DB () {
       useUnifiedTopology: true,
       useCreateIndex: true,
       useFindAndModify: false,
-      ssl: true,
-      sslValidate: true,
       dbName: process.env.DB_NAME,
-      sslCA: [fs.readFileSync('./rds-combined-ca-bundle.pem')],
     };
     function db_error (error: Error) {
       if (error) {

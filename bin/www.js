@@ -7,15 +7,13 @@ const http = require('http');
 const dotenv = require('dotenv');
 const setIoServer = require('../dist/src/socket');
 
-
 dotenv.config();
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '4000');
 
 app.set('port', port);
 
 const server = http.createServer(app);
 setIoServer.default(server);
-
 
 server.listen(port);
 server.on('error', onError);
