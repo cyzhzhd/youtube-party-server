@@ -1,13 +1,19 @@
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
+
+import server from './src/apolloServer';
 import connect_DB from './src/models/index';
 import indexRouter from './src/routes/index';
 import partyRouter from './src/routes/party';
 
+
+
 const app = express();
 
-const allowedOrigins = ['http://localhost:3001', 'https://www.utubeparty.com'];
+server.applyMiddleware({app});
+
+const allowedOrigins = ['http://localhost:3001', 'https://www.utubeparty.com', 'https://studio.apollographql.com'];
 
 app.use(cors({
   origin: (origin, callback) => {

@@ -1,6 +1,3 @@
-// import * as app from '../dist/app.js';
-// import app from '../dist/app.js';
-// import { app } from '../dist/app.js';
 const app = require('../dist/app');
 const debug = require('debug')('youtube-party-server:server');
 const http = require('http');
@@ -8,33 +5,15 @@ const dotenv = require('dotenv');
 const setIoServer = require('../dist/src/socket');
 
 dotenv.config();
-const port = normalizePort(process.env.PORT || '4000');
 
-app.set('port', port);
+app.set('port', process.env.PORT);
 
 const server = http.createServer(app);
 setIoServer.default(server);
 
-server.listen(port);
+server.listen(process.env.PORT);
 server.on('error', onError);
 server.on('listening', onListening);
-
-// 필요한가?
-function normalizePort(val) {
-  const port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
 
 function onError(error) {
   if (error.syscall !== 'listen') {
