@@ -6,12 +6,13 @@ const setIoServer = require('../dist/src/socket');
 
 dotenv.config();
 
-app.set('port', process.env.PORT);
+const port = process.env.PORT;
+app.set('port', port);
 
 const server = http.createServer(app);
 setIoServer.default(server);
 
-server.listen(process.env.PORT);
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -41,4 +42,5 @@ function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }

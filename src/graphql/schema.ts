@@ -3,7 +3,7 @@ import { gql } from 'apollo-server';
 const typeDefs = gql`
   type Query {
     parties: PartyConnection!
-    party(id: ID!): Party
+    party(id: String!): Party
   }
 
   type PartyConnection {
@@ -18,6 +18,7 @@ const typeDefs = gql`
     description: String!
     hostId: String
     currentVideo: Video
+    videos: [Video!]
     numUsers: Int
   }
 

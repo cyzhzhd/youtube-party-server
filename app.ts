@@ -13,7 +13,7 @@ const app = express();
 
 server.applyMiddleware({app});
 
-const allowedOrigins = ['http://localhost:3001', 'https://www.utubeparty.com', 'https://studio.apollographql.com'];
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://www.utubeparty.com', 'https://studio.apollographql.com'];
 
 app.use(cors({
   origin: (origin, callback) => {

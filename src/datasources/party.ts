@@ -10,7 +10,6 @@ class PartyAPI extends RESTDataSource {
   async getAllParties() {
     try {
       const parties = await Party.find({});
-      console.log('getAllParties', parties);
       return parties;
     } catch (error) {
       console.error("getAllParties error", error);
@@ -28,6 +27,7 @@ class PartyAPI extends RESTDataSource {
 
   async createParty(name: String, description: String, hostId: String) {
     try {
+      console.log('datasoruces createParty parameter',name, description, hostId);
       const party = await new Party({
         name,
         description,

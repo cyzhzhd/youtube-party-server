@@ -40,13 +40,18 @@ const setIoServer = function (server: import('http').Server): void {
         if(add) {
           cond = {
             $addToSet: {
-              videos: videoId,
+              videos: {
+                vid: videoId,
+                title: null,
+              },
             }
           };
         } else {
           cond = {
             $pull: {
-              videos: videoId,
+              videos: {
+                vid: videoId,
+              },
             }
           };
         }

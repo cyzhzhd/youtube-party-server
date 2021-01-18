@@ -2,7 +2,6 @@ const Query = {
   parties: async(_: any, __: any, { dataSources }: any) => {
     try {
       const parties = await dataSources.partyAPI.getAllParties();
-      console.log('parties', parties);
       return {
         parties,
       }
@@ -12,7 +11,9 @@ const Query = {
   },
 
   // *** promise쓰지 않는 이유는?
-  party: (_: any, { id }: any, { dataSources }: any) => dataSources.partyAPI.getPartyById(id),
+  party: (_: any, {id}: any, { dataSources }: any) => {
+    return dataSources.partyAPI.getPartyById(id)
+  },
   
   // party: async(_: any, { id }: any, { dataSources }: any) => {
   //   try {

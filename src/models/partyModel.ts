@@ -10,8 +10,11 @@ const partyModel = new Schema({
   hostId: { type: String, required: true },
   startTime: { type: Date, required: true },
   endTime: { type: Date },
-
-  videos: [{ type: String }],
+  currentVideo: { type: String },
+  videos: [{ 
+    vid: { type: String },
+    title: { type: String }
+   }],
   userList: [{
     uid: { type: ObjectId, required: true },
     user: { type: String, required: true },

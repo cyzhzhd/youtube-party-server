@@ -1,13 +1,11 @@
 const Mutation = {
-  createParty: async(_: any, { name, description, hostId }: any, { dataSources }: any) => {
+  createParty: async(_: any, {name, description, hostId}: any, { dataSources }: any) => {
     try {
-      console.log('createParty parameter',name, description, hostId);
       let success = false;
       let party;
       if (name && description && hostId) {
         party = await dataSources.partyAPI.createParty(name, description, hostId);
         if(party) success = true;
-        console.log('createParty', party);
       }
 
       return {
