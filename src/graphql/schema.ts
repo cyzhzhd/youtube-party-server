@@ -1,41 +1,11 @@
-import { gql } from 'apollo-server';
+import { makeExecutableSchema, mergeTypeDefs, mergeResolvers } from 'graphql-tools';
+import PartySchema from './party/party.graphql';
+import PartyResolver from './party/party.resolver';
 
-const typeDefs = gql`
-  type Query {
-    parties: PartyConnection!
-    party(id: String!): Party
-  }
+const typeArray = [PartySchema];
+export const typeDefs = mergeTypeDefs(typeArray);
 
-  type PartyConnection {
-    cursor: String
-    hasMore: Boolean
-    parties: [Party]
-  }
+const resolverArray = [PartyResolver];
+export const resolvers = mergeResolvers(resolverArray);
 
-  type Party {
-    _id: ID!
-    name: String!
-    description: String!
-    hostId: String
-    currentVideo: Video
-    videos: [Video!]
-    numUsers: Int
-  }
-
-  type Video {
-    id: ID!
-    vid: String
-    title: String
-  }
-
-  type Mutation {
-    createParty(name: String, description: String, hostId: ID ): PartyUpdateResponse!
-  }
-  
-  type PartyUpdateResponse {
-    success: Boolean!
-    message: String
-    party: Party
-  }
-`;
-export default typeDefs;
+export const schema = makeExecutableSchema({ typeDefs, resolvers });

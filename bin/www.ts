@@ -1,16 +1,17 @@
-const app = require('../dist/app');
-const debug = require('debug')('youtube-party-server:server');
-const http = require('http');
-const dotenv = require('dotenv');
-const setIoServer = require('../dist/src/socket');
-
+import debug from 'debug';
+debug('youtube-party-server:server');
+import dotenv from 'dotenv';
 dotenv.config();
+import http from 'http';
+
+import app from '../src/app';
+import setIoServer from '../src/socket';
 
 const port = process.env.PORT;
 app.set('port', port);
 
 const server = http.createServer(app);
-setIoServer.default(server);
+setIoServer(server);
 
 server.listen(port);
 server.on('error', onError);
