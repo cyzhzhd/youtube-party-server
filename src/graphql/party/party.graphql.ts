@@ -14,7 +14,7 @@ const Party = gql`
 
   type Party {
     _id: ID
-    uid: ID
+    hostId: ID
     partyName: String
     currentVideo: Video
     videos: [Video]

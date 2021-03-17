@@ -3,7 +3,6 @@ import { CreatePartyProps, GetAllPartiesProps, GetPartyProps } from './partyType
 const query = {
   parties: async (_, { cursor, limit }: GetAllPartiesProps, { dataSources }) => {
     try {
-      console.log(cursor, limit);
       const result = await dataSources.partyAPI.getAllParties({ cursor, limit });
       return result;
     } catch (error) {
