@@ -5,6 +5,7 @@ import cors from 'cors';
 import server from './graphql/index';
 import connect_DB from './models/index';
 import indexRouter from './routes/index';
+import authRouter from './routes/auth';
 
 const app = express();
 
@@ -40,5 +41,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 
 export default app;
