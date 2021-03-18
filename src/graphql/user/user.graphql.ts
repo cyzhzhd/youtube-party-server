@@ -1,8 +1,10 @@
 import { gql } from 'apollo-server';
 
 const User = gql`
+  type Query {
+    user: UserDetail
+  }
   type Mutation {
-    signInUser(id: String!, password: String!): UserUpdateResponse
     signUpUser(id: String!, password: String!, nickName: String!): UserUpdateResponse
   }
 
@@ -16,12 +18,12 @@ const User = gql`
     uid: String
     nickName: String
     status: String
-    bookmarkedParties: BookmarkedParties
-    friendList: FriendList
+    bookmarkedParties: [BookmarkedParty]
+    friendList: [FriendList]
     joinedTime: String
   }
 
-  type BookmarkedParties {
+  type BookmarkedParty {
     partyId: ID
     partyName: String
     numCurrentUser: Int

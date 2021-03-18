@@ -14,9 +14,10 @@ const setIoServer = function (server: import('http').Server): void {
       socket.join(partyId);
     });
 
-    socket.on('sendMsg', ({ uid, content, partyId }) => {
+    socket.on('sendMsg', ({ uid, nickName, content, partyId }) => {
       const msg = {
         uid,
+        nickName,
         content,
         partyId,
         time: Date.now(),

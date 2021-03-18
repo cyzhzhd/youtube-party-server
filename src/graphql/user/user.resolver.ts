@@ -1,18 +1,10 @@
-import { SignInProps, SignUpProps } from './userType';
+import { SignUpProps } from './userType';
 
-const query = {};
+const query = {
+  user: (_, __, { userDoc }) => userDoc,
+};
 
 const mutation = {
-  signInUser: async (_, { id, password }: SignInProps, { dataSources }) => {
-    try {
-      console.log(id, password);
-      if (id && password) {
-        return await dataSources.userAPI.signInUser({ id, password });
-      }
-    } catch (error) {
-      console.error('error in Mutation signInUser', error);
-    }
-  },
   signUpUser: async (_, { id, password, nickName }: SignUpProps, { dataSources }) => {
     try {
       console.log(id, password, nickName);
