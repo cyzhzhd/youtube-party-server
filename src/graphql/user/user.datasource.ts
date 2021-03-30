@@ -25,6 +25,15 @@ class UserAPI extends RESTDataSource {
       console.error('singUpUser error', error);
     }
   }
+
+  async findUser(nickName: string) {
+    try {
+      const users = await User.find({ nickName: { $regex: nickName, $options: 'i' } }).limit(10);
+      return users;
+    } catch (error) {
+      console.error('findUser error', error);
+    }
+  }
 }
 
 export default UserAPI;

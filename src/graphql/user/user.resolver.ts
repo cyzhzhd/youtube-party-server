@@ -2,6 +2,16 @@ import { SignUpProps } from './userType';
 
 const query = {
   user: (_, __, { userDoc }) => userDoc,
+  searchedUser: async (_, { nickName }: { nickName: string }, { dataSources }) => {
+    try {
+      if (nickName) {
+        const users = await dataSources.userAPI.findUser(nickName);
+        return users;
+      }
+    } catch (error) {
+      console.error('error on Query searchedUser', error);
+    }
+  },
 };
 
 const mutation = {

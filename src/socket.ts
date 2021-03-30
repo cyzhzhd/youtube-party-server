@@ -5,13 +5,13 @@ const setIoServer = function (server: import('http').Server): void {
   const ioServer = new Server(server, { transports: ['websocket'] });
 
   ioServer.on('connection', (socket: Socket) => {
-    /**
-     * 유저와 처음으로 커넥션을 생성할 때, 유저에게 sessionId 전달.
-     */
     socket.emit('sessionId', socket.id);
 
     socket.on('joinPartyRoom', ({ partyId }) => {
       socket.join(partyId);
+    });
+    socket.on('leavePartyRoom', ({ partyId }) => {
+      socket.leave(partyId);
     });
 
     socket.on('sendMsg', ({ uid, nickName, content, partyId }) => {
