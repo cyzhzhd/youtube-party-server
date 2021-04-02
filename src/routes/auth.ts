@@ -1,10 +1,9 @@
 import express, { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { UserType } from '../graphql/user/userType';
-import { User } from '../models/userModel';
+import UserModel from '../models/userModel';
 import { Token } from '../models/tokenModel';
-import { JWT } from '../type/type';
+import { JWT } from '../graphql/user/userType';
 const router = express.Router();
 
 function generateAccessToken(data) {
@@ -16,7 +15,7 @@ router.post('/login', async (req: Request, res: Response) => {
   }
   try {
     const { id, password } = req.body;
-    const userDoc = (await User.findOne({ uid: id })) as UserType;
+    const userDoc = await UserModel.findOne({ uid: id });
     if (userDoc === null) {
       return res.status(400).send('invalid_id');
     }
