@@ -7,6 +7,12 @@ const User = gql`
   }
   type Mutation {
     signUpUser(id: String!, password: String!, nickName: String!): UserUpdateResponse
+    sendFriendRequest(uid: String): UpdateResponse
+  }
+
+  type UpdateResponse {
+    success: Boolean
+    message: String
   }
 
   type UserUpdateResponse {
@@ -21,12 +27,13 @@ const User = gql`
     status: String
     bookmarkedParties: [BookmarkedParty]
     friendList: [FriendList]
+    notificationHistory: [NotificationHistory]
     joinedTime: String
   }
 
   type SearchedUserDetail {
-    uid: String
-    nickName: String
+    id: String
+    name: String
   }
 
   type BookmarkedParty {
@@ -42,6 +49,16 @@ const User = gql`
     nickName: String
     status: String
     partyName: String
+  }
+
+  type NotificationHistory {
+    _id: String
+    type: String
+    from: String
+    to: String
+    content: String
+    time: String
+    checked: Boolean
   }
 `;
 export default User;

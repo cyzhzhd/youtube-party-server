@@ -1,3 +1,4 @@
+import { User } from './userType';
 import { SignUpProps } from './userType';
 
 const query = {
@@ -6,7 +7,7 @@ const query = {
     try {
       if (nickName) {
         const users = await dataSources.userAPI.findUser(nickName);
-        return users;
+        return users.map((user: User) => ({ id: user.uid, name: user.nickName }));
       }
     } catch (error) {
       console.error('error on Query searchedUser', error);
@@ -17,7 +18,6 @@ const query = {
 const mutation = {
   signUpUser: async (_, { id, password, nickName }: SignUpProps, { dataSources }) => {
     try {
-      console.log(id, password, nickName);
       let success = false;
       let user;
       if (id && password && nickName) {
@@ -32,6 +32,19 @@ const mutation = {
       };
     } catch (error) {
       console.error('error in Mutation signUpUser', error);
+    }
+  },
+
+  sendFriendRequest: async (_, { uid }: { uid: string }, { userDoc, dataSources }) => {
+    try {
+      const success = await dataSources.userAPI.saveFriendRequest(userDoc.uid, uid);
+
+      return {
+        success,
+        message: success ? 'succesfully save friend request' : 'error on friend request',
+      };
+    } catch (error) {
+      console.error('error in Mutation sendFriendRequest', error);
     }
   },
 };

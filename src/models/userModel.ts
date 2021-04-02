@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { User } from '../graphql/user/userType';
 
 const { Schema } = mongoose;
 const {
@@ -24,7 +25,18 @@ export const userModel = new Schema({
       partyName: { type: String },
     },
   ],
+  notificationHistory: [
+    {
+      _id: { type: ObjectId },
+      type: { type: String, required: true },
+      from: { type: String, required: true },
+      to: { type: String, required: true },
+      content: { type: String },
+      time: { type: Date, required: true },
+      checked: { type: Boolean },
+    },
+  ],
   joinedTime: { type: Date, required: true },
 });
 
-export const User = mongoose.model('User', userModel);
+export default mongoose.model<User>('User', userModel);
